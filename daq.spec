@@ -1,6 +1,6 @@
 %define name    daq
 %define version 0.2
-%define release %mkrel 1
+%define release %mkrel 2
 %define major 0
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -16,6 +16,10 @@ Source:     http://www.snort.org/downloads/%{name}-%{version}.tar.gz
 BuildRequires:	pcap-devel
 BuildRequires:  bison
 BuildRequires:  flex
+BuildRequires:	netfilter_queue-devel
+BuildRequires:	dnet-devel
+BuildRequires:	iptables-ipq-devel
+BuildRequires:	iptables-devel
 %if %mdkversion < 200800
 BuildRoot:  %{_tmppath}/%{name}-%{version}
 %endif
@@ -43,6 +47,13 @@ when invoking Snort to perform PCAP readback or inline operation, etc.  The
 DAQ library may be useful for other packet processing applications and the
 modular nature allows you to build new modules for other platforms.
 
+%package -n     %{name}-modules
+Summary:        Bundled DAQ modules
+Group:          System/Libraries
+Provides:       %{name}-modules = %{version}-%{release}
+
+%description -n %{name}-modules
+Contains the DAQ modules that come bundled with the base LibDAQ distribution.
 
 %package        -n     %{develname}
 Summary:        Header files for the dssl library
@@ -72,13 +83,14 @@ These are .h files.
 %prep
 %setup -q 
 
-export LIBS=-lpcap 
-%configure2_5x --enable-shared
+%configure2_5x --disable-ipfw-module
 
 %build
 %make
 %install
 %makeinstall_std
+# Remove the .la files for the DAQ modules -- we don't want them!
+%{__rm} -f %{buildroot}/%{_libdir}/daq/*.la
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -89,6 +101,14 @@ export LIBS=-lpcap
 %{_libdir}/libdaq.so.%{major}*
 %{_libdir}/libsfbpf.so.%{major}*
 
+%files -n %{name}-modules
+%defattr(-,root,root)
+%{_libdir}/daq/daq_afpacket.so
+%{_libdir}/daq/daq_dump.so
+%{_libdir}/daq/daq_ipq.so
+%{_libdir}/daq/daq_nfq.so
+%{_libdir}/daq/daq_pcap.so
+
 %files  -n %{develname}
 %defattr(-,root,root)
 %{_bindir}/daq-modules-config
@@ -97,14 +117,6 @@ export LIBS=-lpcap
 %{_includedir}/daq_common.h
 %{_includedir}/sfbpf.h
 %{_includedir}/sfbpf_dlt.h
-%{_libdir}/daq/daq_afpacket.la
-%{_libdir}/daq/daq_afpacket.so
-%{_libdir}/daq/daq_dump.la
-%{_libdir}/daq/daq_dump.so
-%{_libdir}/daq/daq_ipfw.la
-%{_libdir}/daq/daq_ipfw.so
-%{_libdir}/daq/daq_pcap.la
-%{_libdir}/daq/daq_pcap.so
 %{_libdir}/libdaq_static.a
 %{_libdir}/libdaq_static.la
 %{_libdir}/libdaq_static_modules.a
