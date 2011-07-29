@@ -1,6 +1,6 @@
 %define name    daq
 %define version 0.5
-%define release %mkrel 4
+%define release %mkrel 3
 %define major 0
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -20,8 +20,11 @@ BuildRequires:	netfilter_queue-devel
 BuildRequires:	dnet-devel
 BuildRequires:	iptables-ipq-devel
 BuildRequires:	iptables-devel
-%if %mdkversion < 200800
-BuildRoot:  %{_tmppath}/%{name}-%{version}
+
+%if "%{distribution}" == "Mandriva Linux"
+	%if %mdkversion < 200800
+	BuildRoot:  %{_tmppath}/%{name}-%{version}
+	%endif
 %endif
 
 %description
@@ -75,9 +78,11 @@ modular nature allows you to build new modules for other platforms.
 
 These are .h files.
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
+%if "%{distribution}" == "Mandriva Linux"
+	%if %mdkversion < 200900
+		%post -n %{libname} -p /sbin/ldconfig
+		%postun -n %{libname} -p /sbin/ldconfig
+	%endif
 %endif
 
 %prep
@@ -128,5 +133,7 @@ These are .h files.
 %{_libdir}/libdaq.so
 %{_libdir}/libdaq.a
 %{_libdir}/libdaq.la
+
+
 
 
