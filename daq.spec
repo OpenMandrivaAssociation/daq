@@ -1,5 +1,5 @@
 %define name    daq
-%define version 0.6.1
+%define version 0.6.2
 %define release %mkrel 1
 %define major 0
 %define libname %mklibname %{name} %{major}
