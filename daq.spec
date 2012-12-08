@@ -108,7 +108,7 @@ This package contains the static libraries for %{name}.
 %doc README
 %{_libdir}/daq/daq_afpacket.so
 %{_libdir}/daq/daq_dump.so
-%{_libdir}/daq/daq_ipq.so
+#%{_libdir}/daq/daq_ipq.so
 %{_libdir}/daq/daq_nfq.so
 %{_libdir}/daq/daq_pcap.so
 
