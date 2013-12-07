@@ -8,7 +8,7 @@
 Summary:	Data Acquisition library, for packet I/O
 Name:		daq
 Version:	1.1.1
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://www.snort.org/
