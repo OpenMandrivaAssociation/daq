@@ -1,4 +1,4 @@
-%define major 1
+%define major 2
 %define sfbpfmajor 0
 %define libname %mklibname %{name} %{major}
 %define libsfbpf %mklibname sfbpf %{sfbpfmajor}
@@ -7,12 +7,12 @@
 
 Summary:	Data Acquisition library, for packet I/O
 Name:		daq
-Version:	1.1.1
-Release:	7
+Version:	2.0.2
+Release:	1
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://www.snort.org/
-Source0:	%{name}-%{version}.tar.gz
+Source0:	https://www.snort.org/downloads/snort/%{name}-%{version}.tar.gz
 
 BuildRequires:	bison
 BuildRequires:	flex
@@ -77,7 +77,7 @@ This package contains the static libraries for %{name}.
 %setup -q 
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 	--disable-ipfw-module
 
