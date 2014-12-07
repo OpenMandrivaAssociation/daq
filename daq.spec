@@ -9,7 +9,7 @@
 
 Name:		daq
 Version:	2.0.2
-Release:	1
+Release:	2
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
 Group:		Networking/Other
