@@ -9,14 +9,14 @@
 
 Name:		daq
 Version:	2.0.2
-Release:	4
+Release:	5
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://www.snort.org/
 Source0:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz
 Source1:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz.sig
-BuildRequires:	pcap-devel
+BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
@@ -74,9 +74,9 @@ Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Requires:	%{libsfbpf} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Requires:	openssl-devel
-Requires:	libpcap-devel
-Requires:	zlib-devel
+Requires:	pkgconfig(openssl)
+Requires:	pkgconfig(libpcap)
+Requires:	pkgconfig(zlib)
 
 %description -n %{develname}
 Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
@@ -97,16 +97,16 @@ Provides:       %{name}-static-devel = %{EVRD}
 This package contains the static libraries for %{name}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure --disable-ipfw-module
 # Parallel builds sometimes fail unless this is built first
-%make -C sfbpf sf_grammar.c
-%make
+%make_build -C sfbpf sf_grammar.c
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files modules
 %{_libdir}/daq
