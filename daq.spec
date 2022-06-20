@@ -20,7 +20,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
 BuildRequires:	pkgconfig(libipq)
-BuildRequires:  pkgconfig(libpcap)
+BuildRequires:          pkgconfig(libpcap)
 BuildRequires:	pkgconfig(xtables)
 BuildRequires:	dnet-devel
 
@@ -124,15 +124,13 @@ This package contains the static libraries for %{name}.
 #{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
 
 %files  -n %{develname}
-#{_bindir}/daq-modules-config
+%{_bindir}/daqtest
+%{_bindir}/daqtest-static
+%{_includedir}/daq_*
 %{_includedir}/daq.h
-#{_includedir}/daq_api.h
-%{_includedir}/daq_common.h
-#{_includedir}/sfbpf.h
-#{_includedir}/sfbpf_dlt.h
-#{_libdir}/libdaq_static_modules.a
-#{_libdir}/libsfbpf.so
-%{_libdir}/libdaq.so
+%{_libdir}/libdaq.so 
+%{_libdir}/pkgconfig/libdaq.pc
 
 %files  -n %{staticname}
-#{_libdir}/libdaq_static.a
+%{_libdir}/libdaq_static_*
+%{_libdir}/pkgconfig/libdaq_static*
