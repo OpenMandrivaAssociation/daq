@@ -8,14 +8,13 @@
 %define staticname %mklibname %{name} -s -d
 
 Name:		daq
-Version:	2.0.2
-Release:	5
+Version:	3.0.8
+Release:	1
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://www.snort.org/
-Source0:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz
-Source1:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz.sig
+Source0:	https://github.com/snort3/libdaq/archive/refs/tags/v%{version}/libdaq-%{version}.tar.gz
 BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	bison
 BuildRequires:	flex
@@ -97,7 +96,7 @@ Provides:       %{name}-static-devel = %{EVRD}
 This package contains the static libraries for %{name}.
 
 %prep
-%autosetup -p1
+%autosetup -n libdaq-%{version} -p1
 
 %build
 %configure --disable-ipfw-module
