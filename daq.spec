@@ -133,4 +133,4 @@ This package contains the static libraries for %{name}.
 %{_libdir}/libdaq.so
 
 %files  -n %{staticname}
-%{_libdir}/libdaq_static.a
+#{_libdir}/libdaq_static.a
