@@ -101,7 +101,9 @@ This package contains the static libraries for %{name}.
 
 %build
 ./bootstrap
-%configure --disable-ipfw-module
+%configure \
+            --disable-ipfw-module \
+            --enable-bpf-module
 # Parallel builds sometimes fail unless this is built first
 #make_build -C sfbpf sf_grammar.c
 %make_build
