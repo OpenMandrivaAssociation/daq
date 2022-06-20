@@ -122,14 +122,14 @@ This package contains the static libraries for %{name}.
 #{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
 
 %files  -n %{develname}
-%{_bindir}/daq-modules-config
+#{_bindir}/daq-modules-config
 %{_includedir}/daq.h
-%{_includedir}/daq_api.h
+#{_includedir}/daq_api.h
 %{_includedir}/daq_common.h
-%{_includedir}/sfbpf.h
-%{_includedir}/sfbpf_dlt.h
-%{_libdir}/libdaq_static_modules.a
-%{_libdir}/libsfbpf.so
+#{_includedir}/sfbpf.h
+#{_includedir}/sfbpf_dlt.h
+#{_libdir}/libdaq_static_modules.a
+#{_libdir}/libsfbpf.so
 %{_libdir}/libdaq.so
 
 %files  -n %{staticname}
