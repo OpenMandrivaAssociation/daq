@@ -15,7 +15,7 @@ License:	GPLv2+
 Group:		Networking/Other
 URL:		http://www.snort.org/
 Source0:	https://github.com/snort3/libdaq/archive/refs/tags/v%{version}/libdaq-%{version}.tar.gz
-BuildRequires:	pkgconfig(libpcap)
+
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
@@ -118,8 +118,8 @@ This package contains the static libraries for %{name}.
 %{_libdir}/libdaq.so.%{major}.*
 
 %files -n %{libsfbpf}
-%{_libdir}/libsfbpf.so.%{sfbpfmajor}
-%{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
+#{_libdir}/libsfbpf.so.%{sfbpfmajor}
+#{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
 
 %files  -n %{develname}
 %{_bindir}/daq-modules-config
