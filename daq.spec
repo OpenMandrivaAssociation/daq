@@ -20,6 +20,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
 BuildRequires:	pkgconfig(libipq)
+BuildRequires:  pkgconfig(libpcap)
 BuildRequires:	pkgconfig(xtables)
 BuildRequires:	dnet-devel
 
