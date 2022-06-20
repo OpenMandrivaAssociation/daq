@@ -112,7 +112,7 @@ This package contains the static libraries for %{name}.
 %{_libdir}/daq
 
 %files -n %{libname}
-%doc README
+%doc README*
 %{_libdir}/libdaq.so.%{major}
 %{_libdir}/libdaq.so.%{major}.*
 
