@@ -2,7 +2,7 @@
 %define libname %mklibname %{name} %{major}
 
 %define sfbpfmajor 0
-%define libsfbpf %mklibname sfbpf %{sfbpfmajor}
+#define libsfbpf %mklibname sfbpf %{sfbpfmajor}
 
 %define develname %mklibname %{name} -d
 %define staticname %mklibname %{name} -s -d
@@ -46,21 +46,21 @@ when invoking Snort to perform PCAP readback or inline operation, etc.  The
 DAQ library may be useful for other packet processing applications and the
 modular nature allows you to build new modules for other platforms.
 
-%package -n %{libsfbpf}
-Summary:	Library for daq
-Group:		System/Libraries
-Conflicts:	%{_lib}daq1 < %{version}-%{release}
-Conflicts:	%{_lib}daq0 < %{version}-%{release}
+#package -n %{libsfbpf}
+#Summary:	Library for daq
+#Group:		System/Libraries
+#Conflicts:	%{_lib}daq1 < %{version}-%{release}
+#Conflicts:	%{_lib}daq0 < %{version}-%{release}
 
-%description -n %{libsfbpf}
-Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
-DAQ replaces direct calls to PCAP functions with an abstraction layer that
-facilitates operation on a variety of hardware and software interfaces without
-requiring changes to Snort.  It is possible to select the DAQ type and mode
-when invoking Snort to perform PCAP readback or inline operation, etc.  The
-DAQ library may be useful for other packet processing applications and the
-modular nature allows you to build new modules for other platforms.
-
+#description -n %{libsfbpf}
+#Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
+#DAQ replaces direct calls to PCAP functions with an abstraction layer that
+#facilitates operation on a variety of hardware and software interfaces without
+#requiring changes to Snort.  It is possible to select the DAQ type and mode
+#when invoking Snort to perform PCAP readback or inline operation, etc.  The
+#DAQ library may be useful for other packet processing applications and the
+#modular nature allows you to build new modules for other platforms.
+#
 %package modules
 Summary:	Bundled DAQ modules
 Group:		System/Libraries
@@ -72,7 +72,7 @@ Contains the DAQ modules that come bundled with the base LibDAQ distribution.
 Summary:	Header files for the dssl library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libsfbpf} = %{version}-%{release}
+#Requires:	%{libsfbpf} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	pkgconfig(openssl)
 Requires:	pkgconfig(libpcap)
@@ -119,7 +119,7 @@ This package contains the static libraries for %{name}.
 %{_libdir}/libdaq.so.%{major}
 %{_libdir}/libdaq.so.%{major}.*
 
-%files -n %{libsfbpf}
+#files -n %{libsfbpf}
 #{_libdir}/libsfbpf.so.%{sfbpfmajor}
 #{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
 
