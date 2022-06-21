@@ -1,26 +1,26 @@
-%define major 2
+%define major 3
 %define libname %mklibname %{name} %{major}
 
 %define sfbpfmajor 0
-%define libsfbpf %mklibname sfbpf %{sfbpfmajor}
+#define libsfbpf %mklibname sfbpf %{sfbpfmajor}
 
 %define develname %mklibname %{name} -d
 %define staticname %mklibname %{name} -s -d
 
 Name:		daq
-Version:	2.0.2
-Release:	5
+Version:	3.0.9
+Release:	1
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://www.snort.org/
-Source0:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz
-Source1:	http://www.snort.org/downloads/%{name}-%{version}.tar.gz.sig
-BuildRequires:	pkgconfig(libpcap)
+Source0:	https://github.com/snort3/libdaq/archive/refs/tags/v%{version}/libdaq-%{version}.tar.gz
+
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
 BuildRequires:	pkgconfig(libipq)
+BuildRequires:          pkgconfig(libpcap)
 BuildRequires:	pkgconfig(xtables)
 BuildRequires:	dnet-devel
 
@@ -46,21 +46,21 @@ when invoking Snort to perform PCAP readback or inline operation, etc.  The
 DAQ library may be useful for other packet processing applications and the
 modular nature allows you to build new modules for other platforms.
 
-%package -n %{libsfbpf}
-Summary:	Library for daq
-Group:		System/Libraries
-Conflicts:	%{_lib}daq1 < %{version}-%{release}
-Conflicts:	%{_lib}daq0 < %{version}-%{release}
+#package -n %{libsfbpf}
+#Summary:	Library for daq
+#Group:		System/Libraries
+#Conflicts:	%{_lib}daq1 < %{version}-%{release}
+#Conflicts:	%{_lib}daq0 < %{version}-%{release}
 
-%description -n %{libsfbpf}
-Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
-DAQ replaces direct calls to PCAP functions with an abstraction layer that
-facilitates operation on a variety of hardware and software interfaces without
-requiring changes to Snort.  It is possible to select the DAQ type and mode
-when invoking Snort to perform PCAP readback or inline operation, etc.  The
-DAQ library may be useful for other packet processing applications and the
-modular nature allows you to build new modules for other platforms.
-
+#description -n %{libsfbpf}
+#Snort 2.9 introduces the DAQ, or Data Acquisition library, for packet I/O.  The
+#DAQ replaces direct calls to PCAP functions with an abstraction layer that
+#facilitates operation on a variety of hardware and software interfaces without
+#requiring changes to Snort.  It is possible to select the DAQ type and mode
+#when invoking Snort to perform PCAP readback or inline operation, etc.  The
+#DAQ library may be useful for other packet processing applications and the
+#modular nature allows you to build new modules for other platforms.
+#
 %package modules
 Summary:	Bundled DAQ modules
 Group:		System/Libraries
@@ -72,7 +72,7 @@ Contains the DAQ modules that come bundled with the base LibDAQ distribution.
 Summary:	Header files for the dssl library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libsfbpf} = %{version}-%{release}
+#Requires:	%{libsfbpf} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	pkgconfig(openssl)
 Requires:	pkgconfig(libpcap)
@@ -97,12 +97,15 @@ Provides:       %{name}-static-devel = %{EVRD}
 This package contains the static libraries for %{name}.
 
 %prep
-%autosetup -p1
+%autosetup -n libdaq-%{version} -p1
 
 %build
-%configure --disable-ipfw-module
+./bootstrap
+%configure \
+            --disable-ipfw-module \
+            --enable-bpf-module
 # Parallel builds sometimes fail unless this is built first
-%make_build -C sfbpf sf_grammar.c
+#make_build -C sfbpf sf_grammar.c
 %make_build
 
 %install
@@ -112,24 +115,22 @@ This package contains the static libraries for %{name}.
 %{_libdir}/daq
 
 %files -n %{libname}
-%doc README
+%doc README*
 %{_libdir}/libdaq.so.%{major}
 %{_libdir}/libdaq.so.%{major}.*
 
-%files -n %{libsfbpf}
-%{_libdir}/libsfbpf.so.%{sfbpfmajor}
-%{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
+#files -n %{libsfbpf}
+#{_libdir}/libsfbpf.so.%{sfbpfmajor}
+#{_libdir}/libsfbpf.so.%{sfbpfmajor}.*
 
 %files  -n %{develname}
-%{_bindir}/daq-modules-config
+%{_bindir}/daqtest
+%{_bindir}/daqtest-static
+%{_includedir}/daq_*
 %{_includedir}/daq.h
-%{_includedir}/daq_api.h
-%{_includedir}/daq_common.h
-%{_includedir}/sfbpf.h
-%{_includedir}/sfbpf_dlt.h
-%{_libdir}/libdaq_static_modules.a
-%{_libdir}/libsfbpf.so
-%{_libdir}/libdaq.so
+%{_libdir}/libdaq.so 
+%{_libdir}/pkgconfig/libdaq.pc
 
 %files  -n %{staticname}
-%{_libdir}/libdaq_static.a
+%{_libdir}/libdaq_static_*
+%{_libdir}/pkgconfig/libdaq_static*
