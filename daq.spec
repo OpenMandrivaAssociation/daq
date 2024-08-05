@@ -8,7 +8,7 @@
 %define staticname %mklibname %{name} -s -d
 
 Name:		daq
-Version:	3.0.15
+Version:	3.0.16
 Release:	1
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
