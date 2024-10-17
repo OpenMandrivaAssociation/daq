@@ -13,7 +13,7 @@ Release:	1
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
 Group:		Networking/Other
-URL:		http://www.snort.org/
+URL:		https://www.snort.org/
 Source0:	https://github.com/snort3/libdaq/archive/refs/tags/v%{version}/libdaq-%{version}.tar.gz
 
 BuildRequires:	bison
