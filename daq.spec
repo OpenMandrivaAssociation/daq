@@ -16,6 +16,11 @@ Group:		Networking/Other
 URL:		https://www.snort.org/
 Source0:	https://github.com/snort3/libdaq/archive/refs/tags/v%{version}/libdaq-%{version}.tar.gz
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(libnetfilter_queue)
