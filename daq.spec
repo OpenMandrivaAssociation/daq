@@ -8,7 +8,7 @@
 %define staticname %mklibname %{name} -s -d
 
 Name:		daq
-Version:	3.0.19
+Version:	3.0.27
 Release:	1
 Summary:	Data Acquisition library, for packet I/O
 License:	GPLv2+
@@ -102,7 +102,7 @@ Provides:       %{name}-static-devel = %{EVRD}
 This package contains the static libraries for %{name}.
 
 %prep
-%autosetup -n libdaq-%{version} -p1
+%autosetup -n libdaq-3.0.27 -p1
 
 %build
 ./bootstrap
